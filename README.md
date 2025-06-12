@@ -1,13 +1,16 @@
-This reaction game for the Circuit Playground Express begins when the player presses Button A. During the game, LEDs will light up in green, red, or yellow. Players must respond correctly: press the left button for green, the right button for red, and scream for yellow (detected by the sound sensor). Each correct action earns 1 point, while incorrect actions yield no points. The game progresses through three speed levels—1.5 seconds, 1.0 second, and 0.5 seconds—changing every 5 turns, and concludes after 15 total turns.
+## Game Concept
+This is a color-based reaction game for the Circuit Playground Express. The game starts when the player presses any button. LEDs will randomly light up red, green, or yellow. The player must respond by pressing the **left button** for green, the **right button** for red, or **shaking the device** for yellow. Correct responses earn +1 point; incorrect responses earn 0. The game progresses in speed: 4 turns at 2.0 seconds, 3 turns at 1.5 seconds, and 3 turns at 1.0 second per cue, totaling 10 turns. At the end, the number of **blue LEDs** displayed corresponds to the final score.
 
-| Input                          | Description                              | CPX Method                        |
-|-------------------------------|------------------------------------------|-----------------------------------|
-| Green LED shown               | Player must press **Left Button**        | `CircuitPlayground.leftButton()`  |
-| Red LED shown                 | Player must press **Right Button**       | `CircuitPlayground.rightButton()` |
-| Yellow LED shown              | Player must **Scream**                   | `CircuitPlayground.soundSensor()` |
-| Button A pressed              | Starts the game                          | `CircuitPlayground.buttonA()`     |
+## Input/Output Table
 
-| Output                         | Description                              | CPX Method                        |
-|-------------------------------|------------------------------------------|-----------------------------------|
-| LED lights up (Green/Red/Yellow) | Visual cue for reaction game           | `setPixelColor(index, color)`     |
-| Score displayed (optional)    | Points could be displayed with tone/LEDs | `show()`, `playTone()` etc.       |
+| Input Trigger         | Expected Player Action       | CPX Method                          |
+|-----------------------|------------------------------|-------------------------------------|
+| Green LED appears     | Press **Left Button**        | `CircuitPlayground.leftButton()`    |
+| Red LED appears       | Press **Right Button**       | `CircuitPlayground.rightButton()`   |
+| Yellow LED appears    | **Shake** the board          | `CircuitPlayground.motionX/Y/Z()`   |
+| Any button pressed    | Start the game               | `CircuitPlayground.leftButton()` or `rightButton()` |
+
+| Output Trigger         | Description                              | CPX Method                          |
+|------------------------|------------------------------------------|-------------------------------------|
+| LED lights up (color)  | Show green, red, or yellow signal        | `CircuitPlayground.setPixelColor()` |
+| Blue LEDs at end       | Display score with number of blue pixels | `setPixelColor(i, blue)` + loop     |
